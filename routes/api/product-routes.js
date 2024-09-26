@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
         },
         {
           model: Tag,
+          through: ProductTag, // JOIN with tags, using the ProductTag through table
           attributes: ['id', 'tag_name']
         }
       ]
@@ -41,6 +42,7 @@ router.get('/:id', async (req, res) => {
         },
         {
           model: Tag,
+          through: ProductTag, // JOIN with tags, using the ProductTag through table
           attributes: ['id', 'tag_name']
         }
       ]
