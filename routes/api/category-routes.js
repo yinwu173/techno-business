@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     const categoryData = await Category.findAll({
       include: [{
         model: Product,
-        through: ['id', 'product_name', 'price', 'stock', 'category_id']
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
       }]
     });
     res.status(200).json(categoryData);
@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
 
       include: [{
         model: Product,
-        through: ['id', 'product_name', 'price', 'stock', 'category_id']
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
       }]
     });
 
