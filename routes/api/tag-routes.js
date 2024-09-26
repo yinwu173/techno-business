@@ -8,9 +8,12 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Product data
   try {
     const tagData = await Tag.findAll({
+      // Using the ProductTag through model, allow products to have multiple tags and tags to have many products
       include: [{
         model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+        through: ProductTag,
+        as: 'products'
       }]
     });
     res.status(200).json(tagData);
@@ -25,10 +28,12 @@ router.get('/:id', async (req, res) => {
   try {
     const tagData = await Tag.findOne({
       where: { id: req.params.id },
-
+      // Using the ProductTag through model, allow products to have multiple tags and tags to have many products
       include: [{
         model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
+        through: ProductTag,
+        as: 'products'
       }]
     });
 
